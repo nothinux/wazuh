@@ -619,7 +619,7 @@ void test_set_winsacl_unable_to_get_acl_info(void **state) {
         expect_string(__wrap__merror, formatted_msg, "(6633): Could not extract the ACE information. Error: '700'.");
     }
 
-    expect_string(__wrap__mdebug1, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
+    expect_string(__wrap__mdebug2, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
 
     will_return(wrap_GetAclInformation, NULL);
     will_return(wrap_GetAclInformation, 0);
@@ -697,7 +697,7 @@ void test_set_winsacl_fail_to_alloc_new_sacl(void **state) {
         expect_string(__wrap__merror, formatted_msg, "(6633): Could not extract the ACE information. Error: '700'.");
     }
 
-    expect_string(__wrap__mdebug1, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
+    expect_string(__wrap__mdebug2, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
 
     will_return(wrap_GetAclInformation, NULL);
     will_return(wrap_GetAclInformation, 1);
@@ -778,7 +778,7 @@ void test_set_winsacl_fail_to_initialize_new_sacl(void **state) {
         expect_string(__wrap__merror, formatted_msg, "(6633): Could not extract the ACE information. Error: '700'.");
     }
 
-    expect_string(__wrap__mdebug1, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
+    expect_string(__wrap__mdebug2, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
 
     will_return(wrap_GetAclInformation, NULL);
     will_return(wrap_GetAclInformation, 1);
@@ -865,7 +865,7 @@ void test_set_winsacl_fail_getting_ace_from_old_sacl(void **state) {
         expect_string(__wrap__merror, formatted_msg, "(6633): Could not extract the ACE information. Error: '700'.");
     }
 
-    expect_string(__wrap__mdebug1, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
+    expect_string(__wrap__mdebug2, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
 
     will_return(wrap_GetAclInformation, &old_sacl_info);
     will_return(wrap_GetAclInformation, 1);
@@ -955,7 +955,7 @@ void test_set_winsacl_fail_adding_old_ace_into_new_sacl(void **state) {
         expect_string(__wrap__merror, formatted_msg, "(6633): Could not extract the ACE information. Error: '700'.");
     }
 
-    expect_string(__wrap__mdebug1, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
+    expect_string(__wrap__mdebug2, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
 
     will_return(wrap_GetAclInformation, &old_sacl_info);
     will_return(wrap_GetAclInformation, 1);
@@ -1048,7 +1048,7 @@ void test_set_winsacl_fail_to_alloc_new_ace(void **state) {
         expect_string(__wrap__merror, formatted_msg, "(6633): Could not extract the ACE information. Error: '700'.");
     }
 
-    expect_string(__wrap__mdebug1, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
+    expect_string(__wrap__mdebug2, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
 
     will_return(wrap_GetAclInformation, &old_sacl_info);
     will_return(wrap_GetAclInformation, 1);
@@ -1147,7 +1147,7 @@ void test_set_winsacl_fail_to_copy_sid(void **state) {
         expect_string(__wrap__merror, formatted_msg, "(6633): Could not extract the ACE information. Error: '700'.");
     }
 
-    expect_string(__wrap__mdebug1, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
+    expect_string(__wrap__mdebug2, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
 
     will_return(wrap_GetAclInformation, &old_sacl_info);
     will_return(wrap_GetAclInformation, 1);
@@ -1249,7 +1249,7 @@ void test_set_winsacl_fail_to_add_ace(void **state) {
         expect_string(__wrap__merror, formatted_msg, "(6633): Could not extract the ACE information. Error: '700'.");
     }
 
-    expect_string(__wrap__mdebug1, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
+    expect_string(__wrap__mdebug2, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
 
     will_return(wrap_GetAclInformation, &old_sacl_info);
     will_return(wrap_GetAclInformation, 1);
@@ -1356,7 +1356,7 @@ void test_set_winsacl_fail_to_set_security_info(void **state) {
         expect_string(__wrap__merror, formatted_msg, "(6633): Could not extract the ACE information. Error: '700'.");
     }
 
-    expect_string(__wrap__mdebug1, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
+    expect_string(__wrap__mdebug2, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
 
     will_return(wrap_GetAclInformation, &old_sacl_info);
     will_return(wrap_GetAclInformation, 1);
@@ -1472,7 +1472,7 @@ void test_set_winsacl_success(void **state) {
         expect_string(__wrap__merror, formatted_msg, "(6633): Could not extract the ACE information. Error: '700'.");
     }
 
-    expect_string(__wrap__mdebug1, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
+    expect_string(__wrap__mdebug2, formatted_msg, "(6263): Setting up SACL for 'C:\\a\\path'");
 
     will_return(wrap_GetAclInformation, &old_sacl_info);
     will_return(wrap_GetAclInformation, 1);
@@ -3703,7 +3703,7 @@ void test_restore_sacls_success(void **state){
 
     char debug_msg[OS_MAXSTR];
     snprintf(debug_msg, OS_MAXSTR, FIM_SACL_RESTORED, syscheck.directories[0]->path);
-    expect_string(__wrap__mdebug1, formatted_msg, debug_msg);
+    expect_string(__wrap__mdebug2, formatted_msg, debug_msg);
 
     /* Inside set_privilege */
     {
@@ -3844,7 +3844,7 @@ void test_audit_restore(void **state) {
 
         char debug_msg[OS_MAXSTR];
         snprintf(debug_msg, OS_MAXSTR, FIM_SACL_RESTORED, syscheck.directories[0]->path);
-        expect_string(__wrap__mdebug1, formatted_msg, debug_msg);
+        expect_string(__wrap__mdebug2, formatted_msg, debug_msg);
 
         /* Inside set_privilege */
         {
@@ -4932,7 +4932,7 @@ void test_whodata_callback_4656_duplicate_handle_id_fail_to_delete(void **state)
             "(6630): The event could not be added to the 'whodata' hash table because it is duplicated. Target: '1193046'.");
     }
 
-    expect_string(__wrap__mdebug1, formatted_msg, "(6229): The handler ('1193046') will be updated.");
+    expect_string(__wrap__mdebug2, formatted_msg, "(6229): The handler ('1193046') will be updated.");
 
     expect_value(__wrap_OSHash_Delete_ex, self, syscheck.wdata.fd);
     expect_string(__wrap_OSHash_Delete_ex, key, "1193046");
@@ -5005,7 +5005,7 @@ void test_whodata_callback_4656_duplicate_handle_id_fail_to_readd(void **state) 
             "(6630): The event could not be added to the 'whodata' hash table because it is duplicated. Target: '1193046'.");
     }
 
-    expect_string(__wrap__mdebug1, formatted_msg, "(6229): The handler ('1193046') will be updated.");
+    expect_string(__wrap__mdebug2, formatted_msg, "(6229): The handler ('1193046') will be updated.");
 
     expect_value(__wrap_OSHash_Delete_ex, self, syscheck.wdata.fd);
     expect_string(__wrap_OSHash_Delete_ex, key, "1193046");
@@ -6617,7 +6617,7 @@ void test_state_checker_file_does_not_exist(void **state) {
     expect_string(__wrap_check_path_type, dir, "c:\\a\\path");
     will_return(__wrap_check_path_type, 0);
 
-    expect_string(__wrap__mdebug1, formatted_msg,
+    expect_string(__wrap__mdebug2, formatted_msg,
         "(6022): 'c:\\a\\path' has been deleted. It will not be monitored in real-time Whodata mode.");
 
     will_return(wrap_GetSystemTime, &st);
@@ -6981,7 +6981,7 @@ void test_state_checker_dir_readded_succesful(void **state) {
             expect_string(__wrap__merror, formatted_msg, "(6633): Could not extract the ACE information. Error: '700'.");
         }
 
-        expect_string(__wrap__mdebug1, formatted_msg, "(6263): Setting up SACL for 'c:\\a\\path'");
+        expect_string(__wrap__mdebug2, formatted_msg, "(6263): Setting up SACL for 'c:\\a\\path'");
 
         will_return(wrap_GetAclInformation, &old_sacl_info);
         will_return(wrap_GetAclInformation, 1);
