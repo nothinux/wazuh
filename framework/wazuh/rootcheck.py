@@ -67,9 +67,14 @@ def clear(agent_list=None):
                                       some_msg='Rootcheck database was not cleared on some agents',
                                       none_msg="No rootcheck database was cleared")
 
+    import time
+    import logging
+    logger = logging.getLogger('wazuh')
+    start = time.time()
     wdb_conn = WazuhDBConnection()
+    system_agents = get_agents_info()
     for agent_id in agent_list:
-        if agent_id not in get_agents_info():
+        if agent_id not in system_agents:
             result.add_failed_item(id_=agent_id, error=WazuhResourceNotFound(1701))
         else:
             try:
@@ -77,6 +82,7 @@ def clear(agent_list=None):
                 result.affected_items.append(agent_id)
             except WazuhError as e:
                 result.add_failed_item(id_=agent_id, error=e)
+    logger.info(f'TIME SPENT IN FUNCTION {time.time() - start}')
 
     result.affected_items.sort(key=int)
     result.total_affected_items = len(result.affected_items)
