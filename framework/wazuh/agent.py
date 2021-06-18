@@ -3,6 +3,7 @@
 # This program is free software; you can redistribute it and/or modify it under the terms of GPLv2
 
 import hashlib
+import logging
 import operator
 from os import chmod, path, listdir
 from shutil import copyfile
@@ -197,6 +198,9 @@ def restart_agents(agent_list: list = None) -> AffectedItemsWazuhResult:
                                       none_msg='Restart command was not sent to any agent'
                                       )
 
+    logger = logging.getLogger('wazuh')
+    import time
+    start = time.time()
     agent_list = set(agent_list)
 
     # Add agent with ID 000 to failed_items
@@ -223,6 +227,9 @@ def restart_agents(agent_list: list = None) -> AffectedItemsWazuhResult:
 
         eligible_agents = [agent for agent in agents_with_data if agent not in non_active_agents] if non_active_agents \
             else agents_with_data
+        logger.info(f"TIME AFTER GETTING DATA FROM DB {time.time() - start}")
+
+        start = time.time()
         wq = WazuhQueue(common.ARQUEUE)
         for agent in eligible_agents:
             try:
@@ -231,6 +238,7 @@ def restart_agents(agent_list: list = None) -> AffectedItemsWazuhResult:
             except WazuhException as e:
                 result.add_failed_item(id_=agent['id'], error=e)
         wq.close()
+        logger.info(f"TIME AFTER GETTING DATA FROM DB {time.time() - start}")
 
         result.total_affected_items = len(result.affected_items)
         result.affected_items.sort(key=int)
